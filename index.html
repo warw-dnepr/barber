@@ -1,0 +1,846 @@
+<!-- <?php
+session_start();
+$connect = mysqli_connect('localhost', 'u_barber_tes', 'OLjrBTwZ', 'barber_test');
+$sql = "SELECT * FROM masters";
+$result = mysqli_query($connect, $sql);
+$masters_list = [];
+while ($row = mysqli_fetch_assoc($result)) {
+   $masters_list[] = $row;
+}
+mysqli_close($connect);
+?> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Baribal Kyiv</title>
+   <link rel="shortcut icon" href="img/logo-bear.jpg" type="image/jpg">
+   <link rel="stylesheet" href="css/normalize.css">
+   <link rel="stylesheet" href="less/style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+   <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+   <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+   <div class="wrap">
+      <div class="preloader">
+         <div class="peloader-img">
+         </div>
+      </div>
+      <div class="servise-item-finish">
+         <i class="fa-solid fa-xmark closed-vacancies-finish"></i>
+      </div>
+      <div class="vacancies-window">
+         <i class="fa-solid fa-xmark closed-vacancies-window"></i>
+         <div class="flex">
+            <div class="block-oll-vacancies">
+               <ul class="vacancies">
+                  <li class="vacancies-1">Адміністратор</li>
+                  <li class="vacancies-2">Barber-майстер</li>
+                  <li class="vacancies-3">Прибиральниця</li>
+               </ul>
+            </div>
+            <div class="vacancies-area">
+               <textarea id="vacancies-textarea"
+                  placeholder="Впишіть тут свої дані з назвою вакансіі або просто задзвоніть до нас)"></textarea>
+               <p class="vacancies-btn">Відправити запит</p>
+            </div>
+         </div>
+         <div class="vacancies-oll-info flex">
+            <i class="fa-solid fa-xmark closed-vacancies-window-info"></i>
+            <ul class="info-vacancies-1">
+               <li>Вільна українська. англійська середня та вище.</li>
+               <li>Відповідальність, oхайний зовнішній вигляд.</li>
+               <li>Хороше знання та володіння ПК, комунікабельність.</li>
+               <li><b>Обов'язки:</b></li>
+               <li>Прийом дзвінків та ведення запису клієнтів.</li>
+               <li>Консультування клієнтів щодо послуг барбершопа.</li>
+               <li>Продаж косметики та засобів для домашнього догляду.</li>
+               <li>Контроль наявності необхідних засобів, справності апаратури.</li>
+               <li>Розрахунок клієнтів, робота з касою.</li>
+               <li><b>Умови:</b></li>
+               <li>З/П: Денна ставка +% від продажу косметики.</li>
+               <li>Зміни 2-2/3-3 (плаваючий графік, за домовленістю)</li>
+               <li>Час роботи: 09.40 – 21.00.</li>
+            </ul>
+            <ul class="info-vacancies-2">
+               <li>Пунктуальність, комунікабельність, охайність.</li>
+               <li>Для розгляду кандидатури бажано наявність фото робіт, у разі відсутності таких – готовність приїхати
+                  на співбесіду з моделлю.</li>
+               <li>Майстерів-новачків, випускників барбер-шкіл із дипломами (сертифікатами) розглянемо на окремих
+                  умовах.</li>
+               <li><b>Обов'язки</b></li>
+               <li>Виконання чоловічих стрижок будь-якої складності.</li>
+               <li>Гоління небезпечною бритвою.</li>
+               <li>Стрижка бороди та вусів.</li>
+               <li>Продаж чоловічої косметики</li>
+               <li><b>Умови</b></li>
+               <li>Ставка + % від наданих послуг та від продажу косметики.</li>
+               <li>Гнучкий графік роботи у дружній атмосфері.</li>
+               <li>Можливість навчання.</li>
+            </ul>
+            <ul class="info-vacancies-3">
+               <li>З/П: Денна ставка.</li>
+               <li>Зміни 2-2/3-3 (плаваючий графік, за домовленістю)</li>
+               <li>Час роботи: 09.40 – 21.00.</li>
+            </ul>
+            <!-- vacancies panel -->
+            <div style="display:none;" class="true-vacancies"></div>
+            <!-- vacancies panel -->
+         </div>
+      </div>
+      <div class="wind-for-certificate">
+         <h2>Виберіть послугу та майстра для сертифікату</h2>
+      </div>
+      <div class="reserv-window">
+         <i class="fa-solid fa-xmark closed-reserv-window"></i>
+
+         <div class="check-service">
+            <p class="oll-service">Виберіть ваші послуги<i class="fa-solid fa-chevron-down"></i></p>
+            <p class="oll-masters">Виберіть свого майстра<i class="fa-solid fa-chevron-down"></i></p>
+            <p class="oll-date">Виберіть дату<i class="fa-solid fa-chevron-down"></i></p>
+         </div>
+         <div class="flex-item ">
+            <div class="service-item ">
+               <div class="flex servise-item-oll">
+                  <ul class="service-item-ul service-item-ul-1">
+                     <li class="service-item-1">Чоловіча стрижка<span class="barber">400₴</span><span
+                           class="top-barber">500₴</span></li>
+                     <li class="service-item-2">Стрижка під насадку <span class="barber">300₴</span><span
+                           class="top-barber">300₴</span></li>
+                     <li class="service-item-3">Стрижка бороди <span class="barber">250₴</span><span
+                           class="top-barber">300₴</span></li>
+                     <li class="service-item-4">Дитяча стрижка <span class="barber">300₴</span><span
+                           class="top-barber">400₴</span></li>
+                     <li class="service-item-5">Комплекс <span class="barber">650₴</span><span
+                           class="top-barber">750₴</span>
+                     </li>
+                     <li class="service-item-6">Батько + син <span class="barber">600₴</span><span
+                           class="top-barber">700₴</span></li>
+                  </ul>
+                  <ul class="service-item-ul service-item-ul-2">
+                     <li class="service-item-7">Королівське гоління <span class="barber">350₴</span><span
+                           class="top-barber">400₴</span></li>
+                     <li class="service-item-8">Укладка <span class="barber">150₴</span><span
+                           class="top-barber">150₴</span>
+                     </li>
+                     <li class="service-item-9">Камуфлювання сивини <span class="barber">300₴</span><span
+                           class="top-barber">350₴</span></li>
+                     <li class="service-item-10">Чистка вух <span class="barber">300₴</span><span
+                           class="top-barber">300₴</span></li>
+                     <li class="service-item-11">Black mask <span class="barber">300₴</span><span
+                           class="top-barber">300₴</span></li>
+                     <li class="service-item-12">Повний комплекс <span class="barber">1400₴</span><span
+                           class="top-barber">1500₴</span></li>
+                  </ul>
+               </div>
+               <div>
+                  <ul class="service-item-masters">
+                     <li id="service-item-masters-1" class="master-barber">master-1</li>
+                     <li id="service-item-masters-2" class="master-barber-top">master-2 top barber</li>
+                     <li id="service-item-masters-3" class="master-barber">master-3</li>
+                     <li id="service-item-masters-4" class="master-barber-top">master-4 top barber</li>
+                  </ul>
+               </div>
+               <div class="calendar-barber-oll">
+                  <div class="look-calendar">
+                     <table id="calendar">
+                        <thead>
+                           <tr>
+                              <td><b>‹</b>
+                              <td colspan="5">
+                              <td><b>›</b>
+                           <tr class="dn">
+                              <td>Пн
+                              <td>Вт
+                              <td>Ср
+                              <td>Чт
+                              <td>Пт
+                              <td>Сб
+                              <td>Вс
+                        </thead>
+                        <tbody></tbody>
+                     </table>
+                  </div>
+
+                  <!-- <div class="name-days">
+                     <p>пн</p>
+                     <p>вт</p>
+                     <p>ср</p>
+                     <p>чт</p>
+                     <p>пт</p>
+                     <p>сб</p>
+                     <p>нд</p>
+                  </div>
+                  <div class="calendar-barber"></div> -->
+               </div>
+               <ul class="free-time">
+                  <h3>Bиберіть час <i class="fa-solid fa-xmark closed-time"></i></h3>
+                  <ul class="free-time-box">
+                     <li class="time-check">14:00</д>
+                     <li class="time-check">14:00</д>
+                     <li class="time-check">14:00</д>
+                     <li class="time-check">14:00</д>
+                     <li class="time-check">14:00</д>
+                     <li class="time-check">14:00</д>
+                     <li class="time-check">14:00</д>
+                     <li class="time-check">14:00</д>
+                  </ul>
+               </ul>
+               <div class="client-contact">
+                  <h3>Залиште свої дані</h3>
+                  <input id="userName" type="text" placeholder="Ваше ім'я">
+                  <input id="userPhone" type="tel" placeholder="Ваш телефон">
+               </div>
+            </div>
+
+            <!-- reserve panel -->
+            <div class="true-reserv">
+               <ul class="true-reserv-service"></ul>
+               <ul class="true-reserv-masters"></ul>
+               <div class="flex ">
+                  <ul class="true-reserv-date"></ul>
+                  <ul class="true-reserv-time"></ul>
+               </div>
+               <ul style="display:none;" class="true-reserv-name"></ul>
+               <ul style="display:none;" class="true-reserv-phone"></ul>
+            </div>
+            <!-- reserve panel -->
+
+         </div>
+         <p class="confirm-reserv">Хочу замовити</p>
+      </div>
+
+      <header id="header">
+         <nav>
+            <ul class="flex justify langues-info">
+               <ul class="langues flex">
+                  <li><a href="">ua</a></li>
+                  <li><a href="">en</a></li>
+                  <audio loop id="player">
+                     <source src="audio/audio.mp3">
+                     <source src="audio/audio.ogg">
+                  </audio>
+                  <div class="audio">
+                     <button onclick="document.getElementById('player').play()"><i
+                           class="fa-solid fa-volume-high"></i></button>
+                     <button onclick="document.getElementById('player').pause()"><i
+                           class="fa-solid fa-volume-xmark"></i></button>
+                  </div>
+                  <li class="audio-info">Barber Music</li>
+               </ul>
+               <ul class="contact-reserv flex">
+                  <ul class="flex">
+                     <ul class="phone">
+                        <li><a href="tel:+380661001228">(066)100-12-28</a></li>
+                     </ul>
+                     <ul class="flex" style="margin-right: 5px;">
+                        <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
+                     </ul>
+                  </ul>
+                  <li class="btn-reserv">
+                     <a href="#servicesId">
+                        <p class="btn-reserv-a">записаться</p>
+                     </a>
+                  </li>
+                  <li><i class="fa-solid fa-bars menu-burger"></i></li>
+                  <li><i class="fa-solid fa-xmark menu-burger-close"></i></li>
+               </ul>
+            </ul>
+            <!--  -->
+            <ul class="flex justify main-block main-block-no-adaptive">
+               <li><a href="#aboutUs">о нас</a></li>
+               <li><a href="#servicesId">услуги</a></li>
+               <li><a href="#masterId">мастера</a></li>
+               <ul class="logo">
+                  <li><a href="#header"><img class="logo1" src="img/logo-bear.jpg" alt="BARIBAL"></a></li>
+                  <li><a href="#header"><img class="logo2" src="img/logo.jpg" alt="BARIBAL"></a></li>
+               </ul>
+               <li><a href="#market">магазин</a></li>
+               <li>
+                  <p class="vacancies">вакансии</p>
+               </li>
+               <li><a href="#contactId">контакты</a></li>
+            </ul>
+            <!--  -->
+            <ul class="flex justify main-block main-block-adaptive">
+               <li><a href="#header"><img class="logo2" src="img/logo.jpg" alt="BARIBAL"></a></li>
+               <li><a href="#aboutUs">о нас</a></li>
+               <li><a href="#servicesId">услуги</a></li>
+               <li><a href="#masterId">мастера</a></li>
+               <li><a href="#market">магазин</a></li>
+               <li>
+                  <p class="vacancies">вакансии</p>
+               </li>
+               <li><a href="#contactId">контакты</a></li>
+            </ul>
+            <!--  -->
+            <!--  -->
+            <ul class="main-block-burger">
+               <a href="#header"><img class="logo2" src="img/logo.jpg" alt="BARIBAL"></a></li>
+               <a href="#aboutUs">о нас</a>
+               <a href="#servicesId">услуги</a>
+               <a href="#masterId">мастера</a>
+               <a href="#market">магазин</a>
+               <a href="#header">
+                  <p class="vacancies">вакансии</p>
+               </a>
+               <a href="#contactId">контакты</a>
+            </ul>
+            <!--  -->
+         </nav>
+         <section class="header-section">
+            <div class="flex sec-info">
+               <div>
+                  <div class="img-1"></div>
+                  <div class="block-1">
+                     <h4>Угощаем напитками</h4>
+                     <p>Кофе, чай, сладкая вода, пиво, джин, виски, соки и какао для детей за наш счет.</p>
+                  </div>
+               </div>
+               <div>
+                  <div class="img-2"></div>
+                  <div class="block-2">
+                     <h4>Только качественная косметика</h4>
+                     <p>Используем только качественную и профессиональную косметику для мужчин.</p>
+                  </div>
+               </div>
+               <div>
+                  <div class="img-3"></div>
+                  <div class="block-3">
+                     <h4>Уютная атмосфера</h4>
+                     <p id="aboutUs">У нас вы можете не только привести себя в порялок, но отдохнуть мыслями, поиграть в
+                        приставку
+                        выпить вкусные напитки.</p>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </header>
+
+      <!-- about us -->
+      <section class="about-us">
+         <h2>О НАС</h2>
+         <div>
+            <video class="main__video" autoplay="" muted="" loop="" playsinline="">
+               <source src="img/barber_31.mov" type="video/mov">
+               <source src="img/barber_31.mp4" type="video/mp4">
+            </video>
+         </div>
+         <div id="servicesId"></div>
+      </section>
+
+      <!-- services -->
+      <section class="services">
+         <h2>УСЛУГИ</h2>
+         <!-- <div class="flex justify btn-barber">
+            <div class="barber">BARBER</div>
+            <div class="top-barber">TOP BARBER</div>
+         </div> -->
+         <div class="oll-price">
+            <div class="price-info">
+               <ul class="ul-1">
+                  <h3>Що входить у послугу "Чоловіча стрижка"?</h3>
+                  <li>Ваша послуга починається з консультації. Визначаємо переваги по довжині і формі стрижки.</li>
+                  <li>Далі ваш барбер миє волосся очищающим шампунем і поживним кондиціонером.</li>
+                  <li>За допомогою професійних машинок і ножиць майстер надає форму.</li>
+                  <li>Ще одне миття волосся, в залежності від ваших побажань і необхідності.</li>
+                  <li>І нарешті, майстер робить укладку, обравши підходящий засіб, щоб надати і закріпити форму для
+                     завершення повного образу.</li>
+                  <li class="this-price">Ціна від 400₴</li>
+               </ul>
+               <ul class="ul-2">
+                  <h3>Що входить у послугу "Стрижка під насадку"?</h3>
+                  <li>Ваша послуга починається з консультації. З'ясовуємо переваги по довжині і формі стрижки.</li>
+                  <li>Далі ваш барбер миє волосся спеціальним шампунем.</li>
+                  <li>За допомогою професійних машинок майстер надає форму, використовуючи 2 насадки.</li>
+                  <li>Ще одне миття, щоб прибрати зайве волосся.</li>
+                  <li>Сушка волосся.</li>
+                  <li class="this-price">Ціна від 300₴</li>
+               </ul>
+               <ul class="ul-3">
+                  <h3>Що входить у послугу "Стрижка бороди"?</h3>
+                  <li>Послуга починається з консультації. З'ясовуємо переваги, підбираємо оптимальний варіант і стиль
+                  </li>
+                  <li>Барбер створює форму бороди за допомогою машинки і ножиць.</li>
+                  <li>Майстер підкреслює контур тримерами, в залежності від побажань гостя, далі барбер видаляє зайве
+                     волосся шейвером.</li>
+                  <li>Барбер визначає засіб, найбільш підходящий за типом волосся і наносить на бороду. З засобів може
+                     бути: масло, лосьйон, бальзам або віск.</li>
+                  <li class="this-price">Ціна від 300₴</li>
+               </ul>
+               <ul class="ul-4">
+                  <h3>Що входить до послуги "Дитяча стрижка"?</h3>
+                  <li>Послуга починається з консультації. З'ясовуємо переваги по довжині і формі стрижки. У Baribal
+                     завжди буде врахована думка не тільки батьків, але і самої дитини.</li>
+                  <li>Далі Барбер миє волосся спеціальним шампунем.</li>
+                  <li>Барбер створює форму стрижки за допомогою професійних ножиць і машинок.</li>
+                  <li>Ще одне миття, щоб прибрати зайве волосся.</li>
+                  <li>Сушка волосся. Обираємо потрібний засіб для укладки і наносимо на волосся, щоб надати і
+                     зафіксувати форму.</li>
+                  <li class="this-price">Ціна від 300₴</li>
+               </ul>
+               <ul class="ul-5">
+                  <h3>Що входить у послугу "Комплекс"?</h3>
+                  <li>Ваша послуга починається з консультаціі.Визначаємо переваги по довжині та формі стрижки і бороди,
+                     підбираємо оптимальний варіант і стиль.</li>
+                  <li>Далі ваш барбер миє волосся очищуючим шампунем і поживним кондиціонером.</li>
+                  <li>За допомогою професійних машинок і ножиць майстер надає форму чоловічої стрижки.</li>
+                  <li>Ще одне миття волосся, в залежності від ваших побажань і необхідності.</li>
+                  <li>Барбер створює форму бороди за допомогою машинки і ножиць.</li>
+                  <li>Майстер підкреслює контур тримерами, в залежності від побажань гостя, далі барбер видаляє зайве
+                     волосся шейвером.</li>
+                  <li>Після роботи тримерами і шейвером шкіру необхідно розпарити: наносимо піну, ефірну олію,
+                     накриваємо обличчя гарячим рушником.</li>
+                  <li>Далі барбер наводить контур і підбриває небезпечною бритвою (за побажанням гостя).</li>
+                  <li>Барбер визначає засіб, найбільш підходящий за типом волосся і наносить на бороду. З засобів може
+                     бути: масло, лосьйон, бальзам або віск.</li>
+                  <li>Майстер робить укладку, обравши потрібний стайлінговий засіб, щоб надати і закріпити форму стрижки
+                     для завершення повного образу.</li>
+                  <li class="this-price">Ціна від 700₴</li>
+               </ul>
+               <ul class="ul-6">
+                  <h3>Що входить в послугу "Батько + син"?</h3>
+                  <li>Ваша послуга починається з консультаціі.Визначаємо переваги по довжині і формі стрижки.</li>
+                  <li>Далі барбер миє волосся спеціальним шампунем і поживним кондиціонером.</li>
+                  <li>За допомогою професійних машинок і ножиць майстер надає форму.</li>
+                  <li>Ще одне миття волосся, в залежності від ваших побажань і необхідності.</li>
+                  <li>І нарешті, майстер робить укладку, обравши необхідний стайлінговий засіб, щоб надати і закріпити
+                     форму для завершення повного образу.</li>
+                  <li class="this-price">Ціна від 600₴</li>
+               </ul>
+               <ul class="ul-7">
+                  <h3>Що входить в послугу "Королівське Гоління"?</h3>
+                  <li>Традиційне гоління небезпечною бритвою не втрачає своєї популярності, незважаючи на широкий вибір
+                     інших методик. Процедура дозволяє домогтися зразкової гладкості</li>
+                  <li>Багатоступінчастий процес, заснований на давніх традиціях. Використання масел перед голінням і
+                     гарячих рушників для підготовки шкіри до гоління, надточне гоління, завершене нанесенням
+                     зволожуючого крему або бальзаму після гоління.</li>
+                  <li>У послугу входить: розпарювання шкіри обличчя, зволоження шкіри, гоління небезпечною бритвою,
+                     заспокійливий засіб.</li>
+                  <li>Довіртеся фахівцям нашого Барбершопу! Ми пропонуємо приємний ритуал небезпечного гоління, в якому
+                     кожна дія доведена до досконалості.</li>
+                  <li class="this-price">Ціна від 350₴</li>
+               </ul>
+               <ul class="ul-8">
+                  <h3>Що входить в послугу "Укладка"?</h3>
+                  <li>Миття голови спеціальним шампунем.</li>
+                  <li>Сушка волосся.</li>
+                  <li>Стильна укладка за допомогою професійних засобів з чоловічої косметики.</li>
+                  <li class="this-price">Ціна від 150₴</li>
+               </ul>
+               <ul class="ul-9">
+                  <h3>Що входить в послугу "Камуфлювання сивини"?</h3>
+                  <li>Ваша послуга починається з констультаціі. Визначаємо ваші побажання.</li>
+                  <li>Миття голови спеціальним шампунем</li>
+                  <li>Нанесення фарбувального пігменту, потрібного тону.</li>
+                  <li>Сушка і укладання.</li>
+                  <li class="this-price">Ціна від 300₴</li>
+               </ul>
+               <ul class="ul-10">
+                  <h3>Що входить в послугу "Чистка вух"?</h3>
+                  <li>
+                     Клієнт лягає на бік, запалюють свічку та обережно вставляють у перше вухо (це триває приблизно
+                     10-12 хвилин). Друге вухо лікується аналогічно.</li>
+                  <li>Потім клієнту пропонують випити води.</li>
+                  <li>Чищення зазвичай триває близько півгодини. Свічки являють собою порожню трубку з бавовняного
+                     льону, просочену бджолиним воском, медом, шавлією, звіробою, ромашкою та бета-каротином. Свічка має
+                     ефект димоходу з легкою всмоктувальною дією у запаленому стані. Це м'яко масажує барабанну
+                     перетинку, регулює тиск у голові та покращує циркуляцію крові та лімфи. Забруднення виводяться
+                     назовні, а пари, що допомагають заспокоїти нервову систему, вдихаються через ніс. Свічка зазвичай
+                     видає приємний звук, що потріскує, і створює відчуття тепла, комфорту і розслаблення.</li>
+                  <li class="this-price">Ціна від 300₴</li>
+               </ul>
+               <ul class="ul-11">
+                  <h3>Що входить в послугу "Black Mask"?</h3>
+                  <li>Процедура досить проста і безболісна. Так само вона не займає багато часу, 30-40 хвилин вашого
+                     часу і ваша шкіра буде виглядати набагато краще! Black mask часто поєднується з іншими послугами,
+                     щоб ви змогли заощадити час, маску можна робити під час стрижки або корекції бороди.</li>
+                  <li>Майстер розпарює шкіру.</li>
+                  <li>На шкіру наноситься скраб масажними рухами, для очищення і відлущування відмерлих клітин.</li>
+                  <li>Майстер змиває скраб з поверхні шкіри.</li>
+                  <li>Барбер наносить маску на шкіру обличчя, почекати до повного висихання.</li>
+                  <li class="this-price">Ціна від 300₴</li>
+               </ul>
+               <ul class="ul-12">
+                  <h3>Що входить в послугу "Повний комплекс"?</h3>
+                  <li class="this-price">Ціна від 1400₴</li>
+               </ul>
+            </div>
+            <div class="barber-list flex">
+               <div class="list-1">
+                  <div class="flex">
+                     <div>
+                        <p id="price-1">Чоловіча стрижка від 400₴</p>
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p id="price-2">Стрижка під насадку</p>
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p id="price-3">Стрижка бороди</p>
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p id="price-4">Дитяча стрижка</p>
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p id="price-5">Комплекс</a>
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p id="price-6">Батько + син</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="list-2">
+                  <div class="flex">
+                     <div>
+                        <p id="price-7">Королівське гоління</p>
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p id="price-8">Укладка</a>
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p id="price-9">Камуфлювання сивини</p>
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div class="fl-item">
+                        <p id="price-10">Чистка вух</p>
+                        <p><i class="fa-solid item-1 fa-circle-info"></i></p>
+                        <p class="inform-1">Важлива інформація</p>
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div class="fl-item">
+                        <p id="price-11">Black mask</p>
+                        <span><i class="fa-solid item-2 fa-circle-info"></i></span>
+                        <p class="inform-2">Важлива інформація</p>
+
+                     </div>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p id="price-12">Повний комплекс</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- <div class="barber-top-list justify flex">
+               <div class="list-1">
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Мужская стрижка</a></p>
+                     </div>
+                     <p>500₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Стрижка машинкой</a></p>
+                     </div>
+                     <p>300₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Стрижка бороды</a></p>
+                     </div>
+                     <p>300₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Детская стрижка</a></p>
+                     </div>
+                     <p>400₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Комплекс</a></p>
+                     </div>
+                     <p>750₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Отец + сын</a></p>
+                     </div>
+                     <p>700₴</p>
+                  </div>
+               </div>
+               <div class="list-2">
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Королевское бритье</a></p> 
+                     </div>
+                     <p>400₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Укладка</a></p> 
+                     </div>
+                     <p>150₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Камуфлирование</a></p> 
+                     </div>
+                     <p>350₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Чистка ушей</a></p> 
+                     </div>
+                     <p>300₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Black mask</a></p> 
+                     </div>
+                     <p>300₴</p>
+                  </div>
+                  <div class="flex">
+                     <div>
+                        <p><a href="">Полный комплекс</a></p> 
+                     </div>
+                     <p>1500₴</p>
+                  </div>
+               </div>
+            </div> -->
+
+            <div id="masterId"></div>
+         </div>
+         <div class="info-block">
+            <ul class="recomend-info-1">
+               <div class="flex justify">
+                  <h3>Рекомендації після послуги "Чистка вух"</h3>
+                  <i class="fa-solid fa-xmark closed-info-block"></i>
+               </div>
+               <li>Уникайте водних видів спорту, наприклад плавання протягом 24 годин після процедури.</li>
+               <li>Іноді вуха можуть відчуватися чутливішими наступного дня після лікування. Уникайте холодних вітрів
+                  або помістіть невелику кількість вати у вухо, прямо біля входу в слуховий прохід, але не глибше.</li>
+               <li>Після процедури рекомендується пити багато води, щоб вивести токсини та запобігти головному болю
+                  після процедури.</li>
+               <li>Зменшіть споживання напоїв з кофеїном та алкоголю, оскільки вони мають сечогінну дію.</li>
+               <li>Зменшіть споживання молочних продуктів, якщо ви страждаєте від проблем із носовими пазухами, оскільки
+                  вони можуть призвести до утворення надлишку слизу в організмі.</li>
+               <li>Перейдіть до часу, щоб регулярно розслаблятися.</li>
+               <li>Регулярно лікуйте вуха та верхні дихальні шляхи від закладеності.</li>
+               <h3>Протипоказання</h3>
+               <li>Алергія на якийсь із компонентів свічок.</li>
+               <li>Якщо клієнт зазнає зубного болю або біль після стоматологічної роботи, послуга може бути для нього
+                  занадто незручна.</li>
+               <li>Перфорація або відсутність барабанної перетинки.</li>
+               <li>Кохлеарний імплант – лікування може заважати роботі пристрою та викликати дискомфорт.</li>
+               <li>Вентиляційні трубки, вушні дрени або люверси – перед лікуванням рекомендується почекати шість
+                  місяців, щоб барабанна перетинка повністю зажила.</li>
+               <li>Екзема/дерматит у зовнішньому вусі – лікування може викликати дискомфорт та викликати додаткове
+                  подразнення вуха.</li>
+               <li>Нещодавня травма голови чи шиї.</li>
+            </ul>
+            <ul class="recomend-info-2">
+               <div class="flex justify">
+                  <h3>Корисна інформація про послугу "Black Mask"</h3>
+                  <i class="fa-solid fa-xmark closed-info-block"></i>
+               </div>
+               <li>Очищаюча чорна маска оздоровлює епідерміс і допомагає мати привабливий зовнішній вигляд. Black mask
+                  (чорна маска) має спеціальну формулу, яка відкриває пори і добре очищає їх. Чорна маска видаляє весь
+                  бруд з пір і допоможе позбутися від чорних цяток. Деревне вугілля, що входить до складу працює за
+                  принципом магніту, притягаючи і прибираючи навіть найглибші забруднення. Black mask освіжить ваше
+                  обличчя.</li>
+               <li>Чорна маска складається з інгредієнтів природного походження, що дозволяє відновити і збалансувати
+                  всі процеси в верхньому шарі шкіри. Завдяки цьому з'являється відчуття, що шкіра не тільки стала
+                  ідеально чистою, але й упругою і свіжою.</li>
+               <li>Чорна маска для обличчя бореться з чорними цятками, добре звужує пори; скорочує кількість запалень і
+                  вугрів, надає антибактеріальний ефект, зменшує виділення себума, покращує колір обличчя, збільшує
+                  обмінні процеси в шкірі.</li>
+               <li>Чорна маска допоможе зняти зайву набряклість, виведе шлаки і токсини, зволожить шкіру вашого обличчя.
+                  Барбери Baribal barbershop рекомендують робити послугу не рідше ніж 1 раз в 2-3 тижні, для підтримки
+                  свіжості обличчя.</li>
+            </ul>
+         </div>
+      </section>
+      <!-- MASTERS -->
+      <section class="sec-masters">
+         <h2>МАСТЕРА</h2>
+         <div class="carusel">
+            <div class="swiper mySwiper">
+               <div class="swiper-wrapper">
+
+                  <div class="swiper-slide">
+                     <img src="img/master_01.jpg" />
+                     <p class="a-master" href="">Хочу Записаться!</p>
+                     <h2>Сергей Обуховский</h2>
+                     <p>Топ Барбер</p>
+                     <p>Лучший путь к успеху - это влюбиться в то что ты делаешь.</p>
+                  </div>
+                  <div class="swiper-slide">
+                     <img src="img/master_02.jpg" />
+                     <p class="a-master" href="">Хочу Записаться!</p>
+                     <h2>Жук-Шахрай Марина</h2>
+                     <p>Барбер</p>
+                     <p>Профессионал - тот, кто чувствует работу душой.</p>
+                  </div>
+                  <div class="swiper-slide">
+                     <img src="img/master_03.jpg" />
+                     <p class="a-master" href="">Хочу Записаться!</p>
+                     <h2>Виталий Плиш</h2>
+                     <p>Барбер</p>
+                     <p>Техника выполнения - это один из инструментов в работе мастера.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!--GIFT CERTIFICAT  -->
+      <section class="gift-certificat">
+         <h2>ПОДАРОЧНЫЙ СЕРТИФИКАТ</h2>
+         <div class="flex justify">
+            <img id="imgGift" src="img/certificate.jpg" alt="certificate">
+            <div class="gift-text">
+               <p>Хотите сделать подарок настоящему мужчине? Baribal барбершоп поможет вам выбрать идеальный подарок! В
+                  Baribal есть возможность приобрести подарочный сертификат в барбербершоп в Киеве на любую услугу.
+                  Подарочный сертификат в барбершоп – отличный вариант подарка друзьям, родственникам или коллегам по
+                  любому поводу. Не всегда удается угадать желание человека, а вот выглядеть ухоженно хотят все. Поэтому
+                  сертификат в барбешоп будет как нельзя кстати.</p>
+
+               <a href="#servicesId">
+                  <p class="gift-btn">Хочу Подарить Сертификат</p>
+               </a>
+            </div>
+         </div>
+      </section>
+      <!-- gallery -->
+      <section class="gallery">
+         <h2>ГАЛЕРЕЯ</h2>
+         <div class="carusel">
+            <div class="carusel-1">
+               <div><img src="img/gallery/gallery_1.jpg"></div>
+               <div><img src="img/gallery/gallery_2.jpg"></div>
+               <div><img src="img/gallery/gallery_3.jpg"></div>
+               <div><img src="img/gallery/gallery_4.jpg"></div>
+               <div><img src="img/gallery/gallery_5.jpg"></div>
+               <div><img src="img/gallery/gallery_6.jpg"></div>
+               <div><img src="img/gallery/gallery_7.jpg"></div>
+               <div><img src="img/gallery/gallery_8.jpg"></div>
+               <div><img src="img/gallery/gallery_9.jpg"></div>
+            </div>
+            <div class="carusel-2">
+               <div><img src="img/gallery/gallery_10.jpg"></div>
+               <div><img src="img/gallery/gallery_11.jpg"></div>
+               <div><img src="img/gallery/gallery_12.jpg"></div>
+               <div><img src="img/gallery/gallery_13.jpg"></div>
+               <div><img src="img/gallery/gallery_14.jpg"></div>
+               <div><img src="img/gallery/gallery_15.jpg"></div>
+               <div><img src="img/gallery/gallery_16.jpg"></div>
+               <div><img src="img/gallery/gallery_17.jpg"></div>
+               <div><img src="img/gallery/gallery_18.jpg"></div>
+            </div>
+            <div id="market"></div>
+         </div>
+
+      </section>
+      <!-- //////////////market -->
+      <section class="market">
+         <h2>МАГАЗИН</h2>
+         <div class="market-carusel">
+            <div class="market-div-oll">
+               <div class="market-info">
+                  <p>Назва товару</p>
+                  <p>Ціна товару</p>
+               </div>
+            </div>
+            <div class="market-div-oll">
+               <div class="market-info">
+                  <p>Назва товару</p>
+                  <p>Ціна товару</p>
+               </div>
+            </div>
+            <div class="market-div-oll">
+               <div class="market-info">
+                  <p>Назва товару</p>
+                  <p>Ціна товару</p>
+               </div>
+            </div>
+            <div class="market-div-oll">
+               <div class="market-info">
+                  <p>Назва товару</p>
+                  <p>Ціна товару</p>
+               </div>
+            </div>
+            <div class="market-div-oll">
+               <div class="market-info">
+                  <p>Назва товару</p>
+                  <p>Ціна товару</p>
+               </div>
+            </div>
+         </div>
+
+      </section>
+      <!-- ////////////contact -->
+      <section id="contactId" class="contact">
+         <h2>КОНТАКТЫ</h2>
+         <div class="flex" style="display: flow-root;">
+
+            <!-- <div class="weather-block ">
+                  <h3 id="city">city</h3>
+                  <p ><img id="mainIcon" src="" alt=""></p>
+                  <p id="temp">temperature</p>
+               </div> -->
+            <div class="adress">
+               <p>Проспект Николая Бажана ,1а
+                  <br> ЖК “Заречный”
+               </p>
+               <p>Время работы: 10:00 - 21:00</p>
+               <p><a href="tel:+380671001228">(067)100-12-28</a><a href="tel:+380661001228"> (066)100-12-28</a></p>
+               <p><a href="mailto:BARIBAL.KIEV@GMAIL.COM">BARIBAL.KIEV@GMAIL.COM</a> <a href=""><i
+                        class="fa-brands fa-instagram"></i></a> <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+               </p>
+            </div>
+         </div>
+         <div class="map">
+
+            <iframe
+               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2543.4217601180158!2d30.598302!3d50.395977!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x51c7aa77a1812509!2sBaribal%20Barbershop!5e0!3m2!1sen!2sua!4v1659525880322!5m2!1sen!2sua"
+               style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+         </div>
+      </section>
+   </div>
+
+
+   <script src="slick/slick.min.js"></script>
+   <script src="js/app.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js"></script>
+   <script>
+      // let mastersList = <? echo json_encode($masters_list); ?>;
+      // mastersList.forEach(element => {
+      //    let slide = document.createElement('DIV');
+      //    slide.className = 'swiper-slide';
+      //    slide.innerHTML = `<img src="img/${element.img_master}">`;
+         // slide.innerHTML +=`<a href="#servicesId"><p id="${element.id_master}" class= "a-master" >Хочу записаться</p></a>`;
+      //    slide.innerHTML+=`<h2>${element.name_master}</h2>`;
+      //    slide.innerHTML+=`<p class="master-status">${element.status_master}</p>`;
+      //    slide.innerHTML+=`<p>${element.about_master}</p>`;
+      //    $('.swiper-wrapper').append(slide);
+      // });
+   </script>
+</body>
+
+</html>
